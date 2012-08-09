@@ -1,6 +1,6 @@
 # json-to-html
 
-Convert JSON Object to HTML. This will work in the browser too.
+Convert JSON Object to HTML. This works in the browser too.
 
 ## Installation
 
