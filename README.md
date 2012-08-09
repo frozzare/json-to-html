@@ -7,21 +7,27 @@ Convert JSON Object to HTML. This works in the browser too.
 	npm install json-to-html
 
 ## Usage
-	
-	var json2html = require('json-to-html')
-      , html = json2html({ 'hello': 'world' });
 
-	console.log(html);
+```javascript	
+var json2html = require('json-to-html')
+  , html = json2html({ 'hello': 'world' });
+
+console.log(html);
+```
 
 output:
-  
-	{
-	  <span class="string">"hello"</span>: <span class="string">"world"</span>
-	}
+
+```html  
+{
+  <span class="string">"hello"</span>: <span class="string">"world"</span>
+}
+```
 
 2 space indentation is default. Change it by adding a numeric argument to `json2html`.
 
-	var html = json2html(object, 4);
+```javascript
+var html = json2html(object, 4);
+```
 
 Every operand has a span added around it self with different classnames.
 
