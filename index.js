@@ -38,7 +38,7 @@ function to_html (obj) {
   if (typeof obj === 'string') {
     return '<span class="string">"' + escape(obj) + '"</span>';
   } else if (typeof obj === 'number') {
-    return '<span class="number">' + obj.toString() + '</span>';
+    return '<span class="number">' + obj + '</span>';
   } else if (obj === true || obj === false) {
     return '<span class="boolean">' + obj.toString() + '</span>';
   } else if (obj === null) {
