@@ -43,31 +43,34 @@ function to_html (obj) {
     return '<span class="boolean">' + obj.toString() + '</span>';
   } else if (obj === null) {
     return '<span class="null">null</span>';
-  } else if ((obj instanceof Array && !obj.length) || (!Object.keys(obj).length)) {
-    return '<span class="' + (obj instanceof Array ? 'array' : 'object') + '">' + (obj instanceof Array ? '[]' : '{}') + '</span>';
   } else {
-    var arr = obj instanceof Array
-      , str = (arr ? '[' : '{') + '\n'
-      , res = [];
-
-    indents++;
-
-    if (arr) {
-      for (var i = 0; i < obj.length; i++) {
-        res.push(indent(to_html(obj[i])));
-      }
+    var arr = obj instanceof Array;  
+    
+    if ((arr && !obj.length) || (!Object.keys(obj).length)) {
+      return '<span class="' + (arr ? 'array' : 'object') + '">' + (arr ? '[]' : '{}') + '</span>';
     } else {
-      for (var k in obj) {
-        if (obj.hasOwnProperty(k)) {
-          res.push(indent(to_html(k) + ': ' + to_html(obj[k])));
+      var str = (arr ? '[' : '{') + '\n'
+        , res = [];
+
+      indents++;
+
+      if (arr) {
+        for (var i = 0; i < obj.length; i++) {
+          res.push(indent(to_html(obj[i])));
+        }
+      } else {
+        for (var k in obj) {
+          if (obj.hasOwnProperty(k)) {
+            res.push(indent(to_html(k) + ': ' + to_html(obj[k])));
+          }
         }
       }
-    }
 
-    str += res.join(',\n') + '\n';
-    indents--;
-    str += indent(arr ? ']' : '}');
-    return str;
+      str += res.join(',\n') + '\n';
+      indents--;
+      str += indent(arr ? ']' : '}');
+      return str;
+    }
   }
 }
 
