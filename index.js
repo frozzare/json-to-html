@@ -71,7 +71,15 @@ function to_html (obj) {
   }
 }
 
+/**
+ * Export module
+ *
+ * @param {Object} obj
+ * @param {Integer} ind
+ * @return {String}
+ */
+
 module.exports = function (obj, ind) {
-  size = ind || size;
+  if (typeof ind === 'number') size = ind || size;
   return to_html(obj);
 }
