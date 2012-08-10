@@ -44,7 +44,7 @@ function to_html (obj) {
   } else if (obj === null) {
     return '<span class="null">null</span>';
   } else if ((obj instanceof Array && !obj.length) || (!Object.keys(obj).length)) {
-    return '<span class="array">' + (obj instanceof Array ? '[]' : '{}') + '</span>';
+    return '<span class="' + (obj instanceof Array ? 'array' : 'object') + '">' + (obj instanceof Array ? '[]' : '{}') + '</span>';
   } else {
     var arr = obj instanceof Array
       , str = (arr ? '[' : '{') + '\n'
