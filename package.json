@@ -4,10 +4,15 @@
   "description": "Convert JSON Object to HTML",
   "keywords": [],
   "author": "Fredrik Forsmo <fredrik.forsmo@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frozzare/json-to-html.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "mocha": "*",
     "should": "*"
   },
-  "main": "index"
+  "main": "index",
+  "license": "MIT"
 }
