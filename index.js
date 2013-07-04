@@ -1,11 +1,16 @@
-var indents = 0
-  , size = 2;
+
+/**
+ * Expose `html()`.
+ */
+
+module.exports = html;
 
 /**
  * Escape the given string of `html`.
  *
  * @param {String} html
- * @return {String} Escaped HTML
+ * @return {String}
+ * @api private
  */
 
 function escape (html) {
@@ -17,72 +22,77 @@ function escape (html) {
 }
 
 /**
- * Add indentation to `html` string.
+ * Return a span.
  *
- * @param {String} html
- * @return {String} HTML with indentation
+ * @param {String} classname
+ * @param {String} str
+ * @return {String}
+ * @api private
  */
 
-function indent (html) {
-  return Array(indents * size).join(' ') + (html || '');
+function span(classname, str) {
+  return '<span class="' + classname + '">' + str + '</span>';
 }
 
 /**
- * Convert JSON Object to html
- *
- * @param {Object} obj JSON Object to convert
- * @return {String} html output
- */
-
-function to_html (obj) {
-  if (typeof obj === 'string') {
-    return '<span class="string">"' + escape(obj) + '"</span>';
-  } else if (typeof obj === 'number') {
-    return '<span class="number">' + obj + '</span>';
-  } else if (obj === true || obj === false) {
-    return '<span class="boolean">' + obj.toString() + '</span>';
-  } else if (obj === null) {
-    return '<span class="null">null</span>';
-  } else {
-    var arr = obj instanceof Array;  
-    
-    if ((arr && !obj.length) || (!Object.keys(obj).length)) {
-      return '<span class="' + (arr ? 'array' : 'object') + '">' + (arr ? '[]' : '{}') + '</span>';
-    } else {
-      var str = (arr ? '[' : '{') + '\n'
-        , res = [];
-
-      indents++;
-
-      if (arr) {
-        for (var i = 0; i < obj.length; i++) {
-          res.push(indent(to_html(obj[i])));
-        }
-      } else {
-        for (var k in obj) {
-          if (obj.hasOwnProperty(k)) {
-            res.push(indent(to_html(k) + ': ' + to_html(obj[k])));
-          }
-        }
-      }
-
-      str += res.join(',\n') + '\n';
-      indents--;
-      str += indent(arr ? ']' : '}');
-      return str;
-    }
-  }
-}
-
-/**
- * Export module
+ * Convert JSON Object to html.
  *
  * @param {Object} obj
- * @param {Integer} ind
  * @return {String}
+ * @api public
  */
 
-module.exports = function (obj, ind) {
-  if (typeof ind === 'number') size = ind || size;
-  return to_html(obj);
+function html(obj, indents) {
+  var indents = indents || 1;
+
+  function indent() {
+    return Array(indents).join('  ');
+  }
+
+  if ('string' == typeof obj) {
+    return span('string value', '"' + escape(obj) + '"');
+  }
+
+  if ('number' == typeof obj) {
+    return span('number', obj);
+  }
+
+  if ('boolean' == typeof obj) {
+    return span('boolean', obj);
+  }
+
+  if (null === obj) {
+    return span('null', 'null');
+  }
+
+  if (Array.isArray(obj)) {
+    ++indents;
+
+    var buf = '[\n' + obj.map(function(val){
+      return indent() + html(val, indents);
+    }).join(',\n');
+
+    --indents;
+    buf += '\n' + indent() + ']';
+    return buf;
+  }
+
+  var buf = '{';
+  var keys = Object.keys(obj);
+  var len = keys.length;
+  if (len) buf += '\n';
+
+  ++indents;
+  buf += keys.map(function(key){
+    var val = obj[key];
+    key = '"' + key + '"';
+    key = span('string key', key);
+    return indent() + key + ': ' + html(val, indents);
+  }).join(',\n');
+  --indents;
+
+  if (len) buf += '\n' + indent();
+  buf += '}';
+
+  return buf;
 }
