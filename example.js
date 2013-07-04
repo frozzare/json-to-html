@@ -16,4 +16,4 @@ var obj = {
   ]
 };
 
-console.log(html(obj));
+console.log('<pre>' + html(obj) + '</pre>');

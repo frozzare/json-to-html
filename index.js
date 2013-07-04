@@ -50,7 +50,7 @@ function html(obj, indents) {
   }
 
   if ('string' == typeof obj) {
-    return span('string', '"' + escape(obj) + '"');
+    return span('string value', '"' + escape(obj) + '"');
   }
 
   if ('number' == typeof obj) {
@@ -86,7 +86,7 @@ function html(obj, indents) {
   buf += keys.map(function(key){
     var val = obj[key];
     key = '"' + key + '"';
-    key = span('string', key);
+    key = span('string key', key);
     return indent() + key + ': ' + html(val, indents);
   }).join(',\n');
   --indents;
