@@ -1,6 +1,6 @@
 {
   "name": "json-to-html",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Convert JSON Object to HTML",
   "keywords": [],
   "author": "Fredrik Forsmo <fredrik.forsmo@gmail.com>",
