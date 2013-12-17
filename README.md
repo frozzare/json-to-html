@@ -1,6 +1,8 @@
 # json-to-html
 
-Convert JSON Object to HTML.
+Convert JSON Object to HTML. 
+
+Grunt plugin: [https://github.com/frozzare/grunt-json-to-html](https://github.com/frozzare/grunt-json-to-html)
 
 ## Installation
 
