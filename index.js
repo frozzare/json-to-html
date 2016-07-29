@@ -43,7 +43,7 @@ function span(classname, str) {
  */
 
 function html(obj, indents) {
-  var indents = indents || 1;
+  indents = indents || 1;
 
   function indent() {
     return Array(indents).join('  ');
@@ -65,10 +65,12 @@ function html(obj, indents) {
     return span('null', 'null');
   }
 
+  var buf;
+
   if (Array.isArray(obj)) {
     ++indents;
 
-    var buf = '[\n' + obj.map(function(val){
+    buf = '[\n' + obj.map(function(val){
       return indent() + html(val, indents);
     }).join(',\n');
 
@@ -77,7 +79,7 @@ function html(obj, indents) {
     return buf;
   }
 
-  var buf = '{';
+  buf = '{';
   var keys = Object.keys(obj);
   var len = keys.length;
   if (len) buf += '\n';
