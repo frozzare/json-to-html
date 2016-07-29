@@ -1,4 +1,5 @@
 var json2html = require('..');
+require('should');
 
 describe('json2html(object)', function () {
   it ('should return html', function () {
