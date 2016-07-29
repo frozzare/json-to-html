@@ -11,7 +11,8 @@
   "dependencies": {},
   "devDependencies": {
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "webpack": "^1.13.1"
   },
   "main": "index",
   "license": "MIT"
