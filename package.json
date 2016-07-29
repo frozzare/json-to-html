@@ -8,8 +8,12 @@
     "type": "git",
     "url": "https://github.com/frozzare/json-to-html.git"
   },
+  "scripts": {
+    "lint": "eslint *.js"
+  },
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^3.1.1",
     "mocha": "*",
     "should": "*"
   },
