@@ -11,6 +11,7 @@ var obj = {
   created_at: new Date,
   updated_at: new Date,
   views: 523,
+  url: 'https://example.com',
   related: [
     { id: 'iwWby24aqasd', title: 'Nikon D7100 ISO performance' },
     { id: 'iwW123132sse', title: 'Nikon D7100 dynamic range' }
